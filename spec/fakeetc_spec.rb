@@ -125,6 +125,18 @@ describe FakeEtc do
       nil_group.must_be_nil
     end
   end
+
+  describe 'sysconfdir' do
+    it 'should call RealEtc.sysconfdir' do
+      FakeEtc.sysconfdir.must_equal RealEtc.sysconfdir
+    end
+  end
+
+  describe 'systmpdir' do
+    it 'should call RealEtc.systmpdir' do
+      FakeEtc.systmpdir.must_equal RealEtc.systmpdir
+    end
+  end
 end
 
 describe 'FakeEtc' do
