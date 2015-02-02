@@ -24,4 +24,9 @@ module FakeEtc
     fail ArgumentError, "can't find group for #{gid}" if group.nil?
     group
   end
+
+  def self.getgrent
+    @group_ents ||= @groups.values
+    @group_ents.shift
+  end
 end

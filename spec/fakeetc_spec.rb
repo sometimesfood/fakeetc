@@ -44,4 +44,16 @@ describe FakeEtc do
       err.message.must_match "can't find group for #{gid}"
     end
   end
+
+  describe 'getgrent' do
+    it 'should return all group entries in order' do
+      cheese_group = FakeEtc.getgrent
+      parrot_group = FakeEtc.getgrent
+      nil_group = FakeEtc.getgrent
+
+      cheese_group.name.must_equal 'cheeses'
+      parrot_group.name.must_equal 'parrots'
+      nil_group.must_be_nil
+    end
+  end
 end
