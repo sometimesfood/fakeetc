@@ -17,7 +17,7 @@ EOS
                           '{bin,lib,man,spec}/**/*'] \
                         & `git ls-files -z`.split("\0")
 
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.test_files    = gem.files.grep(/^(test|spec|features)\//)
   gem.name          = 'fakeetc'
   gem.require_paths = ['lib']
   gem.version       = FakeEtc::VERSION

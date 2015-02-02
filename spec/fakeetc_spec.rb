@@ -5,8 +5,8 @@ require 'fakeetc'
 describe FakeEtc do
   before(:each) do
     @groups = {
-      'cheeses' => { gid: 10, mem: ['red_leicester', 'tilsit'] },
-      'parrots' => { gid: 20, mem: ['norwegian_blue', 'macaw'] }
+      'cheeses' => { gid: 10, mem: %w(red_leicester tilsit) },
+      'parrots' => { gid: 20, mem: %w(norwegian_blue macaw) }
     }
     FakeEtc.add_groups(@groups)
   end
