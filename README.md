@@ -17,7 +17,9 @@ FakeEtc.add_groups({
   'foo' => { gid: 42, mem: [] },
   'bar' => { gid: 43, mem: ['johndoe'] }
 })
-FakeEtc.getgrnam('bar')
+FakeEtc do
+  Etc.getgrnam('bar')
+end
 # => #<struct Struct::Group name="bar", passwd="x", gid=43, mem=["johndoe"]>
 ```
 
