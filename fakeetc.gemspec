@@ -21,4 +21,6 @@ EOS
   gem.name          = 'fakeetc'
   gem.require_paths = ['lib']
   gem.version       = FakeEtc::VERSION
+
+  gem.add_development_dependency 'rake', '~> 10.4.2'
 end
