@@ -16,6 +16,46 @@ describe FakeEtc do
     FakeEtc.clear_groups
   end
 
+  describe 'activate' do
+    it 'should replace Etc with FakeEtc' do
+      real_etc = Etc
+      fake_etc = FakeEtc
+      Etc.must_equal real_etc
+      FakeEtc.activate
+      Etc.must_equal fake_etc
+      FakeEtc.deactivate
+      Etc.must_equal real_etc
+    end
+  end
+
+  describe 'with' do
+    it 'should activate Etc in a block' do
+      real_etc = Etc
+      fake_etc = FakeEtc
+
+      FakeEtc.with do
+        Etc.must_equal fake_etc
+      end
+      Etc.must_equal real_etc
+    end
+  end
+
+  describe 'without' do
+    it 'should activate Etc in a block' do
+      real_etc = Etc
+      fake_etc = FakeEtc
+
+      FakeEtc.with do
+        Etc.must_equal fake_etc
+        FakeEtc.without do
+          Etc.must_equal real_etc
+        end
+        Etc.must_equal fake_etc
+      end
+      Etc.must_equal real_etc
+    end
+  end
+
   describe 'getgrnam' do
     it 'should find groups by name' do
       cheese_group = FakeEtc.getgrnam('cheeses')
