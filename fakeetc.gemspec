@@ -23,4 +23,5 @@ EOS
   gem.version       = FakeEtc::VERSION
 
   gem.add_development_dependency 'rake', '~> 10.4.2'
+  gem.add_development_dependency 'minitest', '~> 5.5.1'
 end
