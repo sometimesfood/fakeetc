@@ -56,4 +56,15 @@ describe FakeEtc do
       nil_group.must_be_nil
     end
   end
+
+  describe 'endgrent' do
+    it 'should reset group traversal' do
+      cheese_group_1 = FakeEtc.getgrent
+      FakeEtc.endgrent
+      cheese_group_2 = FakeEtc.getgrent
+      FakeEtc.endgrent
+      cheese_group_1.must_equal cheese_group_2
+      cheese_group_1.name.must_equal 'cheeses'
+    end
+  end
 end

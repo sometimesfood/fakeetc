@@ -29,4 +29,8 @@ module FakeEtc
     @group_ents ||= @groups.values
     @group_ents.shift
   end
+
+  def self.endgrent
+    @group_ents = nil
+  end
 end
