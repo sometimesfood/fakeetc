@@ -5,7 +5,6 @@ module FakeEtc
                                 'x',
                                 group_info[:gid],
                                 group_info[:mem])
-      @groups ||= {}
       @groups[group_name] = group
     end
   end
