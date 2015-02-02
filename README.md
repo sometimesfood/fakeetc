@@ -1,6 +1,10 @@
 fakeetc
 =======
 
+[![Gem Version](http://img.shields.io/gem/v/fakeetc.svg?style=flat-square)][gem]
+[![Build Status](http://img.shields.io/travis/sometimesfood/fakeetc.svg?style=flat-square)][travis]
+[![Code Climate](http://img.shields.io/codeclimate/github/sometimesfood/fakeetc.svg?style=flat-square)][codeclimate]
+
 A fake Ruby `Etc` module for your tests.
 
 Intended as a drop-in replacement for [Etc][etc] in unit tests.
@@ -27,3 +31,7 @@ Copyright
 ---------
 
 Copyright (c) 2015 Sebastian Boehm. See LICENSE for details.
+
+[gem]: https://rubygems.org/gems/fakeetc
+[travis]: https://travis-ci.org/sometimesfood/fakeetc
+[codeclimate]: https://codeclimate.com/github/sometimesfood/fakeetc
