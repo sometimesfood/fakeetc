@@ -12,6 +12,7 @@ describe FakeEtc do
   end
 
   after(:each) do
+    FakeEtc.endgrent
     FakeEtc.clear_groups
   end
 
@@ -62,9 +63,26 @@ describe FakeEtc do
       cheese_group_1 = FakeEtc.getgrent
       FakeEtc.endgrent
       cheese_group_2 = FakeEtc.getgrent
-      FakeEtc.endgrent
       cheese_group_1.must_equal cheese_group_2
       cheese_group_1.name.must_equal 'cheeses'
+    end
+  end
+
+  describe 'group' do
+    it 'should execute a given block for each group entry' do
+      groups = {}
+      FakeEtc.group { |g| groups[g.name] = { gid: g.gid, mem: g.mem } }
+      groups.must_equal @groups
+    end
+
+    it 'should behave like getgrent if there was no block given' do
+      cheese_group = FakeEtc.group
+      parrot_group = FakeEtc.group
+      nil_group = FakeEtc.group
+
+      cheese_group.name.must_equal 'cheeses'
+      parrot_group.name.must_equal 'parrots'
+      nil_group.must_be_nil
     end
   end
 end
