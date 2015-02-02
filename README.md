@@ -1,29 +1,27 @@
-# FakeEtc
+fakeetc
+=======
 
-TODO: Write a gem description
+A fake Ruby `Etc` module for your tests.
 
-## Installation
+Intended as a drop-in replacement for [Etc][etc] in unit tests.
 
-Add this line to your application's Gemfile:
+[etc]: http://ruby-doc.org/stdlib-2.2.0/libdoc/etc/rdoc/Etc.html
 
-    gem 'fakeetc'
+Usage
+-----
 
-And then execute:
+```ruby
+require 'fakeetc'
 
-    $ bundle
+FakeEtc.add_groups({
+  'foo' => { gid: 42, mem: [] },
+  'bar' => { gid: 43, mem: ['johndoe'] }
+})
+FakeEtc.getgrnam('bar')
+# => #<struct Struct::Group name="bar", passwd="x", gid=43, mem=["johndoe"]>
+```
 
-Or install it yourself as:
+Copyright
+---------
 
-    $ gem install fakeetc
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Copyright (c) 2015 Sebastian Boehm. See LICENSE for details.

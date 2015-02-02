@@ -1,14 +1,22 @@
 require File.expand_path('../lib/fakeetc/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Sebastian Boehm"]
-  gem.email         = ["sebastian@sometimesfood.org"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.authors       = ['Sebastian Boehm']
+  gem.email         = ['sebastian@sometimesfood.org']
+  gem.license       = 'MIT'
+  gem.summary       = 'A fake Etc module for your tests'
+  gem.homepage      = 'https://github.com/sometimesfood/fakeetc'
+  gem.description   = <<EOS
+FakeEtc is a fake Etc module for your tests.
+EOS
 
-  gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.files         = Dir['Rakefile',
+                          'README.md',
+                          'LICENSE',
+                          'NEWS',
+                          '{bin,lib,man,spec}/**/*'] \
+                        & `git ls-files -z`.split("\0")
+
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = 'fakeetc'
   gem.require_paths = ['lib']
