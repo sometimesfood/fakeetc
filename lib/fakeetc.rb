@@ -21,4 +21,10 @@ module FakeEtc
     fail ArgumentError, "can't find group for #{group_name}" if group.nil?
     group
   end
+
+  def self.getgrgid(gid)
+    group = @groups.values.find { |g| g.gid == gid }
+    fail ArgumentError, "can't find group for #{gid}" if group.nil?
+    group
+  end
 end
