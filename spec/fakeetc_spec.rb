@@ -126,3 +126,15 @@ describe FakeEtc do
     end
   end
 end
+
+describe 'FakeEtc' do
+  it 'should activate FakeEtc and run a given block' do
+    real_etc = Etc
+    fake_etc = FakeEtc
+
+    FakeEtc do
+      Etc.must_equal fake_etc
+    end
+    Etc.must_equal real_etc
+  end
+end
