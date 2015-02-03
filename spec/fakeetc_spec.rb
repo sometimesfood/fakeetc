@@ -8,10 +8,24 @@ describe FakeEtc do
       'cheeses' => { gid: 10, mem: %w(red_leicester tilsit) },
       'parrots' => { gid: 20, mem: %w(norwegian_blue macaw) }
     }
+    @users = {
+      'norwegian_blue' => { uid: 10,
+                            gid: 20,
+                            gecos: 'Remarkable Bird',
+                            dir: '/home/parrot',
+                            shell: '/bin/zsh' },
+      'red_leicester' => { uid: 20,
+                           gid: 10,
+                           gecos: 'a little Red Leicester',
+                           dir: '/home/red_leicester',
+                           shell: '/bin/bash' }
+    }
     FakeEtc.add_groups(@groups)
+    FakeEtc.add_users(@users)
   end
 
   after(:each) do
+    FakeEtc.clear_users
     FakeEtc.endgrent
     FakeEtc.clear_groups
   end
@@ -135,6 +149,24 @@ describe FakeEtc do
   describe 'systmpdir' do
     it 'should call RealEtc.systmpdir' do
       FakeEtc.systmpdir.must_equal RealEtc.systmpdir
+    end
+  end
+
+  describe 'getpwnam' do
+    it 'should find users by name' do
+      red_leicester = FakeEtc.getpwnam('red_leicester')
+      red_leicester.must_be_instance_of Struct::Passwd
+      red_leicester.uid.must_equal @users['red_leicester'][:uid]
+      red_leicester.gid.must_equal @users['red_leicester'][:gid]
+      red_leicester.gecos.must_equal @users['red_leicester'][:gecos]
+      red_leicester.dir.must_equal @users['red_leicester'][:dir]
+      red_leicester.shell.must_equal @users['red_leicester'][:shell]
+    end
+
+    it 'should raise exceptions for non-existent users' do
+      user_name = 'not-a-user'
+      err = -> { FakeEtc.getpwnam(user_name) }.must_raise ArgumentError
+      err.message.must_match "can't find user for #{user_name}"
     end
   end
 end

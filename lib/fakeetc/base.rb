@@ -28,6 +28,7 @@ RealEtc = Etc
 
 module FakeEtc
   @groups = {}
+  @users = {}
 
   def self.activated?
     @activated
