@@ -169,6 +169,24 @@ describe FakeEtc do
       err.message.must_match "can't find user for #{user_name}"
     end
   end
+
+  describe 'getpwuid' do
+    it 'should find users by uid' do
+      norwegian_blue = FakeEtc.getpwuid(@users['norwegian_blue'][:uid])
+      norwegian_blue.must_be_instance_of Struct::Passwd
+      norwegian_blue.uid.must_equal @users['norwegian_blue'][:uid]
+      norwegian_blue.gid.must_equal @users['norwegian_blue'][:gid]
+      norwegian_blue.gecos.must_equal @users['norwegian_blue'][:gecos]
+      norwegian_blue.dir.must_equal @users['norwegian_blue'][:dir]
+      norwegian_blue.shell.must_equal @users['norwegian_blue'][:shell]
+    end
+
+    it 'should raise exceptions for non-existent groups' do
+      uid = 247
+      err = -> { FakeEtc.getpwuid(uid) }.must_raise ArgumentError
+      err.message.must_match "can't find user for #{uid}"
+    end
+  end
 end
 
 describe 'FakeEtc' do

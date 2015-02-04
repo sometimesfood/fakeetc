@@ -22,10 +22,15 @@ module FakeEtc
     user
   end
 
+  def self.getpwuid(uid)
+    user = @users.values.find { |u| u.uid == uid }
+    fail ArgumentError, "can't find user for #{uid}" if user.nil?
+    user
+  end
+
   class << self
     [:endpwent,
      :getpwent,
-     :getpwuid,
      :passwd,
      :setpwent].each do |m|
       define_method(m) do
