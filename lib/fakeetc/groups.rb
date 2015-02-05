@@ -26,12 +26,12 @@ module FakeEtc
   end
 
   def self.getgrent
-    @group_ents ||= @groups.values
-    @group_ents.shift
+    @grents ||= @groups.values
+    @grents.shift
   end
 
   def self.endgrent
-    @group_ents = nil
+    @grents = nil
   end
   class << self
     alias_method :setgrent, :endgrent
