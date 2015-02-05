@@ -33,6 +33,9 @@ module FakeEtc
   def self.endgrent
     @group_ents = nil
   end
+  class << self
+    alias_method :setgrent, :endgrent
+  end
 
   def self.group
     return getgrent unless block_given?
