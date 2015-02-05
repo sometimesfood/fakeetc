@@ -25,6 +25,7 @@ describe FakeEtc do
   end
 
   after(:each) do
+    FakeEtc.endpwent
     FakeEtc.clear_users
     FakeEtc.endgrent
     FakeEtc.clear_groups
@@ -185,6 +186,52 @@ describe FakeEtc do
       uid = 247
       err = -> { FakeEtc.getpwuid(uid) }.must_raise ArgumentError
       err.message.must_match "can't find user for #{uid}"
+    end
+  end
+
+  describe 'getpwent' do
+    it 'should return all user entries in order' do
+      norwegian_blue = FakeEtc.getpwent
+      red_leicester = FakeEtc.getpwent
+      nil_user = FakeEtc.getpwent
+
+      norwegian_blue.name.must_equal 'norwegian_blue'
+      red_leicester.name.must_equal 'red_leicester'
+      nil_user.must_be_nil
+    end
+  end
+
+  describe 'endpwent' do
+    it 'should reset user traversal' do
+      norwegian_blue_1 = FakeEtc.getpwent
+      FakeEtc.endpwent
+      norwegian_blue_2 = FakeEtc.getpwent
+      norwegian_blue_1.must_equal norwegian_blue_2
+      norwegian_blue_1.name.must_equal 'norwegian_blue'
+    end
+  end
+
+  describe 'passwd' do
+    it 'should execute a given block for each group entry' do
+      users = {}
+      FakeEtc.passwd do |u|
+        users[u.name] = { uid: u.uid,
+                          gid: u.gid,
+                          gecos: u.gecos,
+                          dir: u.dir,
+                          shell: u.shell }
+      end
+      users.must_equal @users
+    end
+
+    it 'should behave like getpwent if there was no block given' do
+      norwegian_blue = FakeEtc.passwd
+      red_leicester = FakeEtc.passwd
+      nil_user = FakeEtc.passwd
+
+      norwegian_blue.name.must_equal 'norwegian_blue'
+      red_leicester.name.must_equal 'red_leicester'
+      nil_user.must_be_nil
     end
   end
 end

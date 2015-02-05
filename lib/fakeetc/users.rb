@@ -28,14 +28,22 @@ module FakeEtc
     user
   end
 
+  def self.getpwent
+    @pwents ||= @users.values
+    @pwents.shift
+  end
+
+  def self.endpwent
+    @pwents = nil
+  end
   class << self
-    [:endpwent,
-     :getpwent,
-     :passwd,
-     :setpwent].each do |m|
-      define_method(m) do
-        fail NotImplementedError, "FakeEtc.#{m} not implemented yet"
-      end
-    end
+    alias_method :setpwent, :endpwent
+  end
+
+  def self.passwd
+    return getpwent unless block_given?
+    @users.values.each { |u| yield u }
+    endpwent
+    nil
   end
 end

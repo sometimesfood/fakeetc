@@ -39,10 +39,7 @@ module FakeEtc
 
   def self.group
     return getgrent unless block_given?
-
-    @groups.values.each do |g|
-      yield g
-    end
+    @groups.values.each { |g| yield g }
     endgrent
     nil
   end
