@@ -18,13 +18,49 @@ Usage
 require 'fakeetc'
 
 FakeEtc.add_groups({
-  'foo' => { gid: 42, mem: [] },
-  'bar' => { gid: 43, mem: ['johndoe'] }
+  'empty' => { gid: 42, mem: [] },
+  'anonymous' => { gid: 43, mem: ['johndoe'] }
 })
+FakeEtc.add_users({
+  'janedoe' => { uid: 10,
+                 gid: 20,
+                 gecos: 'Jane Doe',
+                 dir: '/home/janedoe',
+                 shell: '/bin/zsh' },
+  'jackdoe' => { uid: 50,
+                 gid: 60,
+                 gecos: 'Jack Doe',
+                 dir: '/home/jackdoe',
+                 shell: '/bin/bash' },
+})
+
+anonymous = nil
+jack = nil
+
 FakeEtc do
-  Etc.getgrnam('bar')
+  anonymous = Etc.getgrnam('anonymous')
+  jack = Etc.getpwuid(50)
 end
-# => #<struct Struct::Group name="bar", passwd="x", gid=43, mem=["johndoe"]>
+
+anonymous
+# => #<struct Struct::Group
+#      name="anonymous",
+#      passwd="x",
+#      gid=43,
+#      mem=["johndoe"]>
+
+jack
+# => #<struct Struct::Passwd
+#      name="jackdoe",
+#      passwd="x",
+#      uid=50,
+#      gid=60,
+#      gecos="Jack Doe",
+#      dir="/home/jackdoe",
+#      shell="/bin/bash",
+#      change=nil,
+#      uclass=nil,
+#      expire=nil>
 ```
 
 Copyright
