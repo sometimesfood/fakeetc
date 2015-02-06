@@ -77,7 +77,7 @@ module FakeEtc
   end
 end
 
-def FakeEtc(&block)
+def FakeEtc(&block) # rubocop:disable Style/MethodName
   return ::FakeEtc unless block
   ::FakeEtc.with(&block)
 end
