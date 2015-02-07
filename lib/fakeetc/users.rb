@@ -2,9 +2,6 @@ module FakeEtc
   class << self
     def add_users(user_hash)
       passwd = 'x'
-      change = 0
-      uclass = ''
-      expire = 0
 
       user_hash.each do |user_name, user_info|
         user = Struct::Passwd.new(user_name,
@@ -13,10 +10,7 @@ module FakeEtc
                                   user_info[:gid],
                                   user_info[:gecos],
                                   user_info[:dir],
-                                  user_info[:shell],
-                                  change,
-                                  uclass,
-                                  expire)
+                                  user_info[:shell])
         @users[user_name] = user
       end
     end
