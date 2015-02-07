@@ -58,9 +58,9 @@ jack
 #      gecos="Jack Doe",
 #      dir="/home/jackdoe",
 #      shell="/bin/bash",
-#      change=nil,
-#      uclass=nil,
-#      expire=nil>
+#      change=0,
+#      uclass="",
+#      expire=0>
 ```
 
 Copyright
