@@ -1,9 +1,10 @@
 module FakeEtc
   class << self
     def add_groups(group_hash)
+      passwd = 'x'
       group_hash.each do |group_name, group_info|
         group = Struct::Group.new(group_name,
-                                  'x',
+                                  passwd,
                                   group_info[:gid],
                                   group_info[:mem])
         @groups[group_name] = group
