@@ -1,4 +1,4 @@
-module FakeEtc
+module FakeEtc # rubocop:disable Documentation
   class << self
     def add_groups(group_hash)
       passwd = 'x'

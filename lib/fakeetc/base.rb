@@ -26,7 +26,7 @@
 
 RealEtc = Etc
 
-module FakeEtc
+module FakeEtc # rubocop:disable Documentation
   @groups = {}
   @users = {}
 

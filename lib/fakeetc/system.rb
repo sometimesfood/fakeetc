@@ -1,4 +1,4 @@
-module FakeEtc
+module FakeEtc # rubocop:disable Documentation
   def self.sysconfdir
     RealEtc.sysconfdir
   end
