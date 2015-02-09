@@ -1,5 +1,25 @@
 module FakeEtc # rubocop:disable Documentation
   class << self
+    # Adds users to the FakeEtc user list.
+    #
+    # @param user_hash [Hash{String=>Hash{Symbol=>Integer,String}}]
+    #   the list of users that should be added
+    #
+    # @example
+    #   FakeEtc.add_users({
+    #     'janedoe' => { uid: 10,
+    #                    gid: 20,
+    #                    gecos: 'Jane Doe',
+    #                    dir: '/home/janedoe',
+    #                    shell: '/bin/zsh' },
+    #     'jackdoe' => { uid: 50,
+    #                    gid: 60,
+    #                    gecos: 'Jack Doe',
+    #                    dir: '/home/jackdoe',
+    #                    shell: '/bin/bash' },
+    #   })
+    #
+    # @return [void]
     def add_users(user_hash)
       passwd = 'x'
 
