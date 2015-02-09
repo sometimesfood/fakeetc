@@ -24,4 +24,5 @@ EOS
 
   gem.add_development_dependency 'rake', '~> 10.4.2'
   gem.add_development_dependency 'minitest', '~> 5.5.1'
+  gem.add_development_dependency 'yard', '~> 0.8.7.6'
 end

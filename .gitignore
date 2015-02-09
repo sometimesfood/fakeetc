@@ -1,5 +1,6 @@
-/.bundle/
+/doc/
 /pkg/
+/.bundle/
+/.yardoc/
 /Gemfile.lock
 /Gemfile.local
-
