@@ -1,5 +1,17 @@
 module FakeEtc # rubocop:disable Documentation
   class << self
+    # Adds groups to the FakeEtc group list.
+    #
+    # @param group_hash [Hash{String=>Hash{Symbol=>Integer,String}}]
+    #   the list of groups that should be added
+    #
+    # @example
+    #   FakeEtc.add_groups({
+    #     'empty' => { gid: 42, mem: [] },
+    #     'anonymous' => { gid: 43, mem: ['johndoe'] }
+    #   })
+    #
+    # @return [void]
     def add_groups(group_hash)
       passwd = 'x'
       group_hash.each do |group_name, group_info|
@@ -11,6 +23,8 @@ module FakeEtc # rubocop:disable Documentation
       end
     end
 
+    # Clears the group list.
+    # @return [void]
     def clear_groups
       @groups = {}
     end

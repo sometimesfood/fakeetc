@@ -35,6 +35,8 @@ module FakeEtc # rubocop:disable Documentation
       end
     end
 
+    # Clears the user list.
+    # @return [void]
     def clear_users
       @users = {}
     end
