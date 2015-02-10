@@ -41,12 +41,21 @@ module FakeEtc # rubocop:disable Documentation
       @users = {}
     end
 
+    # Finds a user by their user name.
+    # @param user_name [String] the user's name
+    # @return [Struct::Passwd] the user
+    # @raise [ArgumentError] if no user with the given name can be
+    #   found
     def getpwnam(user_name)
       user = @users[user_name]
       fail ArgumentError, "can't find user for #{user_name}" if user.nil?
       user
     end
 
+    # Finds a user by their user id.
+    # @param uid [Integer] the user's id
+    # @return [Struct::Passwd] the user
+    # @raise [ArgumentError] if no user with the given id can be found
     def getpwuid(uid)
       user = @users.values.find { |u| u.uid == uid }
       fail ArgumentError, "can't find user for #{uid}" if user.nil?

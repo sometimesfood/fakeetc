@@ -29,12 +29,22 @@ module FakeEtc # rubocop:disable Documentation
       @groups = {}
     end
 
+    # Finds a group by its group name.
+    # @param group_name [String] the group's name
+    # @return [Struct::Group] the group
+    # @raise [ArgumentError] if no group with the given name can be
+    #   found
     def getgrnam(group_name)
       group = @groups[group_name]
       fail ArgumentError, "can't find group for #{group_name}" if group.nil?
       group
     end
 
+    # Finds a group by its gid.
+    # @param gid [Integer] the group's gid
+    # @return [Struct::Group] the group
+    # @raise [ArgumentError] if no group with the given gid can be
+    #   found
     def getgrgid(gid)
       group = @groups.values.find { |g| g.gid == gid }
       fail ArgumentError, "can't find group for #{gid}" if group.nil?
