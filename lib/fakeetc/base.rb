@@ -30,10 +30,15 @@ module FakeEtc # rubocop:disable Documentation
   @groups = {}
   @users = {}
 
+  # Checks whether FakeEtc is currently activated.
+  # @return [Bool] true if FakeEtc is currently activated, false if it
+  #   is not
   def self.activated?
     @activated
   end
 
+  # Activates FakeEtc.
+  # @return [void]
   def self.activate
     @activated = true
     Object.class_eval do
@@ -42,6 +47,8 @@ module FakeEtc # rubocop:disable Documentation
     end
   end
 
+  # Deactivates FakeEtc.
+  # @return [void]
   def self.deactivate
     Object.class_eval do
       remove_const :Etc
@@ -50,6 +57,8 @@ module FakeEtc # rubocop:disable Documentation
     @activated = false
   end
 
+  # Runs a code block with FakeEtc.
+  # @return [Object] the block's return value
   def self.with
     if activated?
       yield
@@ -63,6 +72,8 @@ module FakeEtc # rubocop:disable Documentation
     end
   end
 
+  # Runs a code block without FakeEtc.
+  # @return [Object] the block's return value
   def self.without
     if !activated?
       yield
@@ -77,6 +88,16 @@ module FakeEtc # rubocop:disable Documentation
   end
 end
 
+# Runs a code block with FakeEtc.
+#
+# @example
+#   FakeEtc.add_groups('foo' => { gid: 42, mem: %w(bar baz) })
+#   FakeEtc do
+#     Etc.getgrnam('foo').gid
+#   end
+#   # => 42
+#
+# @return [Object] the block's return value
 def FakeEtc(&block) # rubocop:disable Style/MethodName
   return ::FakeEtc unless block
   ::FakeEtc.with(&block)
