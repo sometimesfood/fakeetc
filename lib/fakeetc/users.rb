@@ -72,6 +72,9 @@ module FakeEtc # rubocop:disable Documentation
     end
     alias_method :setpwent, :endpwent
 
+    # Executes a block for each user entry.
+    # @yield [Struct::Passwd] the user entry
+    # @return [void]
     def passwd
       return getpwent unless block_given?
       @users.values.each { |u| yield u }

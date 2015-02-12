@@ -61,6 +61,9 @@ module FakeEtc # rubocop:disable Documentation
     end
     alias_method :setgrent, :endgrent
 
+    # Executes a block for each group entry.
+    # @yield [Struct::Group] the group entry
+    # @return [void]
     def group
       return getgrent unless block_given?
       @groups.values.each { |g| yield g }
