@@ -62,11 +62,20 @@ module FakeEtc # rubocop:disable Documentation
       user
     end
 
+    # Returns an entry from the user list. Each successive call
+    # returns the next entry or `nil` if the end of the list has been
+    # reached.
+    #
+    # To reset scanning the user list, use {endpwent}.
+    #
+    # @return [Struct::Passwd] the next entry in the user list
     def getpwent
       @pwents ||= @users.values
       @pwents.shift
     end
 
+    # Ends the process of scanning through the user list.
+    # @return [void]
     def endpwent
       @pwents = nil
     end

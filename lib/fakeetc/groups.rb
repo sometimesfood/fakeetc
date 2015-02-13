@@ -51,11 +51,20 @@ module FakeEtc # rubocop:disable Documentation
       group
     end
 
+    # Returns an entry from the group list. Each successive call
+    # returns the next entry or `nil` if the end of the list has been
+    # reached.
+    #
+    # To reset scanning the group list, use {endgrent}.
+    #
+    # @return [Struct::Group] the next entry in the group list
     def getgrent
       @grents ||= @groups.values
       @grents.shift
     end
 
+    # Ends the process of scanning through the group list.
+    # @return [void]
     def endgrent
       @grents = nil
     end
