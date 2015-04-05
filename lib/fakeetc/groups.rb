@@ -46,7 +46,7 @@ module FakeEtc # rubocop:disable Documentation
     # @raise [ArgumentError] if no group with the given gid can be
     #   found
     def getgrgid(gid)
-      group = @groups.values.find { |g| g.gid == gid }
+      group = getbyid(:group, gid)
       fail ArgumentError, "can't find group for #{gid}" if group.nil?
       group
     end

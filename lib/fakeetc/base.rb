@@ -86,6 +86,19 @@ module FakeEtc # rubocop:disable Documentation
       end
     end
   end
+
+  def self.getbyid(user_or_group, id)
+    fail ArgumentError unless [:user, :group].include?(user_or_group)
+    if user_or_group == :user
+      records = @users
+      id_name = :uid
+    else
+      records = @groups
+      id_name = :gid
+    end
+    records.values.find { |r| r.method(id_name).call == id }
+  end
+  private_class_method :getbyid
 end
 
 # Runs a code block with FakeEtc.
