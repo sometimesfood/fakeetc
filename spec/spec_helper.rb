@@ -1,4 +1,4 @@
-if ENV['CODECLIMATE_REPO_TOKEN=']
+if ENV['CODECLIMATE_REPO_TOKEN']
   require 'simplecov'
   require 'codeclimate-test-reporter'
   ignored_directories = %w(/spec/ /vendor/ /.bundle/)
