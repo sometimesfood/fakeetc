@@ -4,6 +4,7 @@ fakeetc
 [![Gem Version](http://img.shields.io/gem/v/fakeetc.svg?style=flat-square)][gem]
 [![Build Status](http://img.shields.io/travis/sometimesfood/fakeetc.svg?style=flat-square)][travis]
 [![Code Climate](http://img.shields.io/codeclimate/github/sometimesfood/fakeetc.svg?style=flat-square)][codeclimate]
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/sometimesfood/fakeetc.svg?style=flat-square)][codeclimate]
 
 A fake Ruby `Etc` module for your tests.
 
