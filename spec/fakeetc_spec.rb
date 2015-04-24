@@ -44,7 +44,7 @@ describe FakeEtc do
   end
 
   describe 'with' do
-    it 'should activate Etc in a block' do
+    it 'should activate FakeEtc in a block' do
       real_etc = Etc
       fake_etc = FakeEtc
 
@@ -53,10 +53,23 @@ describe FakeEtc do
       end
       Etc.must_equal real_etc
     end
+
+    it 'should run the block if FakeEtc is already activated' do
+      real_etc = Etc
+      fake_etc = FakeEtc
+
+      FakeEtc.with do
+        Etc.must_equal fake_etc
+        FakeEtc.with do
+          Etc.must_equal fake_etc
+        end
+      end
+      Etc.must_equal real_etc
+    end
   end
 
   describe 'without' do
-    it 'should activate Etc in a block' do
+    it 'should deactivate FakeEtc in a block' do
       real_etc = Etc
       fake_etc = FakeEtc
 
@@ -64,6 +77,23 @@ describe FakeEtc do
         Etc.must_equal fake_etc
         FakeEtc.without do
           Etc.must_equal real_etc
+        end
+        Etc.must_equal fake_etc
+      end
+      Etc.must_equal real_etc
+    end
+
+    it 'should run the block if FakeEtc is already deactivated' do
+      real_etc = Etc
+      fake_etc = FakeEtc
+
+      FakeEtc.with do
+        Etc.must_equal fake_etc
+        FakeEtc.without do
+          Etc.must_equal real_etc
+          FakeEtc.without do
+            Etc.must_equal real_etc
+          end
         end
         Etc.must_equal fake_etc
       end
