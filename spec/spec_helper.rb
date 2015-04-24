@@ -5,7 +5,7 @@ if ENV['CODECLIMATE_REPO_TOKEN']
   formatters = [SimpleCov::Formatter::HTMLFormatter,
                 CodeClimate::TestReporter::Formatter]
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[*formatters]
-  SimpleCov.start { ignored_directories.each { |dir| add_filter(dir) } }
+  SimpleCov.start { add_filter(ignored_directories) }
 end
 
 require 'minitest/autorun'
