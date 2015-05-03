@@ -18,7 +18,7 @@ module FakeEtc # rubocop:disable Documentation
         group = Struct::Group.new(group_name,
                                   passwd,
                                   group_info[:gid],
-                                  group_info[:mem])
+                                  group_info[:mem] || [])
         @groups[group_name] = group
       end
     end
