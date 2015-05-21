@@ -22,6 +22,7 @@ describe FakeEtc do
     }
     FakeEtc.add_groups(@groups)
     FakeEtc.add_users(@users)
+    FakeEtc.login = 'norwegian_blue'
   end
 
   after(:each) do
@@ -29,6 +30,7 @@ describe FakeEtc do
     FakeEtc.clear_users
     FakeEtc.endgrent
     FakeEtc.clear_groups
+    FakeEtc.login = nil
   end
 
   describe 'activate' do
@@ -262,6 +264,12 @@ describe FakeEtc do
       norwegian_blue.name.must_equal 'norwegian_blue'
       red_leicester.name.must_equal 'red_leicester'
       nil_user.must_be_nil
+    end
+  end
+
+  describe 'getlogin' do
+    it 'should return the name of the current fake user' do
+      FakeEtc.getlogin.must_equal 'norwegian_blue'
     end
   end
 end

@@ -1,5 +1,9 @@
 module FakeEtc # rubocop:disable Documentation
   class << self
+    # @return [String] the short user name of the currently "logged
+    #   in" fake user
+    attr_writer :login
+
     # Adds users to the FakeEtc user list.
     #
     # @param user_hash [Hash{String=>Hash{Symbol=>Integer,String}}]
@@ -89,6 +93,12 @@ module FakeEtc # rubocop:disable Documentation
       @users.values.each { |u| yield u }
       endpwent
       nil
+    end
+
+    # @return [String] the short user name of the currently "logged
+    #   in" fake user
+    def getlogin
+      @login
     end
   end
 end
