@@ -10,14 +10,13 @@ Gem::Specification.new do |gem|
 FakeEtc is a fake Etc module for your tests.
 EOS
 
-  gem.files         = Dir['Rakefile',
+  gem.files         = Dir['{bin,lib,man,spec}/**/*',
+                          'Rakefile',
                           'README.md',
-                          'LICENSE',
-                          'NEWS',
-                          '{bin,lib,man,spec}/**/*'] \
-                        & `git ls-files -z`.split("\0")
+                          'NEWS.md',
+                          'LICENSE'] & `git ls-files -z`.split("\0")
 
-  gem.test_files    = gem.files.grep(/^(test|spec|features)\//)
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = 'fakeetc'
   gem.require_paths = ['lib']
   gem.version       = FakeEtc::VERSION
