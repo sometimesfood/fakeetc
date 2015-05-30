@@ -61,8 +61,7 @@ module FakeEtc # rubocop:disable Documentation
     # @return [Struct::Passwd] the user
     # @raise [ArgumentError] if no user with the given id can be found
     def getpwuid(*args)
-      uid = idbyargs(:user, args)
-      user = getbyid(:user, uid)
+      user, uid = getbyargs(:user, args)
       fail ArgumentError, "can't find user for #{uid}" if user.nil?
       user
     end

@@ -108,6 +108,13 @@ module FakeEtc # rubocop:disable Documentation
     records.values.find { |r| r.method(id_name).call == id }
   end
   private_class_method :getbyid
+
+  def self.getbyargs(user_or_group, args)
+    id = idbyargs(user_or_group, args)
+    entry = getbyid(user_or_group, id)
+    [entry, id]
+  end
+  private_class_method :getbyargs
 end
 
 # Runs a code block with FakeEtc.
