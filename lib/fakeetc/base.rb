@@ -89,8 +89,6 @@ module FakeEtc # rubocop:disable Documentation
 
   def self.idbyargs(user_or_group, args)
     fail ArgumentError unless [:user, :group].include?(user_or_group)
-    argument_error = "wrong number of arguments (#{args.size} for 0..1)"
-    fail ArgumentError, argument_error if args.size > 1
     return args.first unless args.size.zero?
     user_or_group == :user ? getpwnam(getlogin).uid : getpwnam(getlogin).gid
   end
