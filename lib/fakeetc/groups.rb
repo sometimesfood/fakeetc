@@ -45,8 +45,10 @@ module FakeEtc # rubocop:disable Documentation
     # @return [Struct::Group] the group
     # @raise [ArgumentError] if no group with the given gid can be
     #   found
-    # @todo default to current user's gid
-    def getgrgid(gid)
+    def getgrgid(*args)
+      argument_error = "wrong number of arguments (#{args.size} for 0..1)"
+      fail ArgumentError, argument_error if args.size > 1
+      gid = args.size.zero? ? getpwnam(getlogin).gid : args.first
       group = getbyid(:group, gid)
       fail ArgumentError, "can't find group for #{gid}" if group.nil?
       group

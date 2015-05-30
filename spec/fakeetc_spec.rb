@@ -126,6 +126,14 @@ describe FakeEtc do
       parrot_group.mem.must_equal @groups['parrots'][:mem]
     end
 
+    it 'should return the primary group of the current user' do
+      FakeEtc.login = 'red_leicester'
+      cheese_group = FakeEtc.getgrgid
+      cheese_group.must_be_instance_of Struct::Group
+      cheese_group.gid.must_equal @groups['cheeses'][:gid]
+      cheese_group.mem.must_equal @groups['cheeses'][:mem]
+    end
+
     it 'should raise exceptions for non-existent groups' do
       gid = 247
       err = -> { FakeEtc.getgrgid(gid) }.must_raise ArgumentError
