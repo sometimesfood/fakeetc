@@ -108,9 +108,16 @@ module FakeEtc # rubocop:disable Documentation
   private_class_method :getbyid
 
   def self.getbyargs(user_or_group, args)
+    argument_error = "wrong number of arguments (#{args.size} for 0..1)"
+    fail ArgumentError, argument_error, caller if args.size > 1
+
     id = idbyargs(user_or_group, args)
     entry = getbyid(user_or_group, id)
-    [entry, id]
+
+    unless entry
+      fail ArgumentError, "can't find #{user_or_group} for #{id}", caller
+    end
+    entry
   end
   private_class_method :getbyargs
 end

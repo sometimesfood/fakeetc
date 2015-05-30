@@ -46,11 +46,7 @@ module FakeEtc # rubocop:disable Documentation
     # @raise [ArgumentError] if no group with the given gid can be
     #   found
     def getgrgid(*args)
-      argument_error = "wrong number of arguments (#{args.size} for 0..1)"
-      fail ArgumentError, argument_error if args.size > 1
-      group, gid = getbyargs(:group, args)
-      fail ArgumentError, "can't find group for #{gid}" if group.nil?
-      group
+      getbyargs(:group, args)
     end
 
     # Returns an entry from the group list. Each successive call

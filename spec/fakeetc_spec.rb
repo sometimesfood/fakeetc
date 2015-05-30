@@ -233,7 +233,6 @@ describe FakeEtc do
       red_leicester.shell.must_equal @users['red_leicester'][:shell]
     end
 
-
     it 'should raise exceptions for non-existent groups' do
       uid = 247
       err = -> { FakeEtc.getpwuid(uid) }.must_raise ArgumentError
