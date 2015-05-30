@@ -222,6 +222,18 @@ describe FakeEtc do
       norwegian_blue.shell.must_equal @users['norwegian_blue'][:shell]
     end
 
+    it 'should return the current user' do
+      FakeEtc.login = 'red_leicester'
+      red_leicester = FakeEtc.getpwuid
+      red_leicester.must_be_instance_of Struct::Passwd
+      red_leicester.uid.must_equal @users['red_leicester'][:uid]
+      red_leicester.gid.must_equal @users['red_leicester'][:gid]
+      red_leicester.gecos.must_equal @users['red_leicester'][:gecos]
+      red_leicester.dir.must_equal @users['red_leicester'][:dir]
+      red_leicester.shell.must_equal @users['red_leicester'][:shell]
+    end
+
+
     it 'should raise exceptions for non-existent groups' do
       uid = 247
       err = -> { FakeEtc.getpwuid(uid) }.must_raise ArgumentError
