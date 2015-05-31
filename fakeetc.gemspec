@@ -21,6 +21,8 @@ EOS
   gem.require_paths = ['lib']
   gem.version       = FakeEtc::VERSION
 
+  gem.required_ruby_version = '>= 1.9.3'
+
   gem.add_development_dependency 'rake', '~> 10.4.2'
   gem.add_development_dependency 'minitest', '~> 5.6.0'
   gem.add_development_dependency 'yard', '~> 0.8.7.6'
