@@ -25,19 +25,22 @@ module FakeEtc # rubocop:disable Documentation
     #
     # @return [void]
     def add_users(user_hash)
-      passwd = 'x'
-
       user_hash.each do |user_name, user_info|
-        user = Struct::Passwd.new(user_name,
-                                  passwd,
-                                  user_info[:uid],
-                                  user_info[:gid],
-                                  user_info[:gecos],
-                                  user_info[:dir],
-                                  user_info[:shell])
-        @users[user_name] = user
+        @users[user_name] = to_passwd(user_name, user_info)
       end
     end
+
+    def to_passwd(user_name, user_info)
+      passwd = 'x'
+      Struct::Passwd.new(user_name,
+                         passwd,
+                         user_info[:uid],
+                         user_info[:gid],
+                         user_info[:gecos],
+                         user_info[:dir],
+                         user_info[:shell])
+    end
+    private :to_passwd
 
     # Clears the user list.
     # @return [void]
