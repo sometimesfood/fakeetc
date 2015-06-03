@@ -1,5 +1,5 @@
 # fakeetc NEWS
-## unreleased
+## 0.3.0 (2015-06-03)
 - Add FakeEtc.getlogin
 - Let FakeEtc.getpwuid default to current user
 - Let FakeEtc.getgrgid default to current user's primary group
