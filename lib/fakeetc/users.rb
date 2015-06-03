@@ -59,12 +59,13 @@ module FakeEtc # rubocop:disable Documentation
       user
     end
 
-    # Finds a user by their user id.
+    # Finds a user by their user id. Returns the current user if no
+    #   uid is supplied.
     # @param uid [Integer] the user's id
     # @return [Struct::Passwd] the user
     # @raise [ArgumentError] if no user with the given id can be found
-    def getpwuid(*args)
-      getbyargs(:user, args)
+    def getpwuid(*uid)
+      getbyargs(:user, uid)
     end
 
     # Returns an entry from the user list. Each successive call

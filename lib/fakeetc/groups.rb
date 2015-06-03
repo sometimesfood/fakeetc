@@ -40,13 +40,14 @@ module FakeEtc # rubocop:disable Documentation
       group
     end
 
-    # Finds a group by its gid.
+    # Finds a group by its gid. Returns the current user's primary
+    #   group if no gid is supplied.
     # @param gid [Integer] the group's gid
     # @return [Struct::Group] the group
     # @raise [ArgumentError] if no group with the given gid can be
     #   found
-    def getgrgid(*args)
-      getbyargs(:group, args)
+    def getgrgid(*gid)
+      getbyargs(:group, gid)
     end
 
     # Returns an entry from the group list. Each successive call

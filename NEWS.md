@@ -1,6 +1,8 @@
 # fakeetc NEWS
 ## unreleased
 - Add FakeEtc.getlogin
+- Let FakeEtc.getpwuid default to current user
+- Let FakeEtc.getgrgid default to current user's primary group
 
 ## 0.2.0 (2015-02-13)
 - Add support for user functions (FakeEtc.getgrgid, FakeEtc.getgrnam, ...)
