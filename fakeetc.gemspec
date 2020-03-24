@@ -23,7 +23,7 @@ EOS
 
   gem.required_ruby_version = '>= 1.9.3'
 
-  gem.add_development_dependency 'rake', '~> 10.4.2'
+  gem.add_development_dependency 'rake', '~> 12.3.3'
   gem.add_development_dependency 'minitest', '~> 5.6.0'
   gem.add_development_dependency 'yard', '~> 0.9.12'
 end
